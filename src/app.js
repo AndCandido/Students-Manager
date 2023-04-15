@@ -1,21 +1,11 @@
 import express from 'express';
 import homeRoutes from './routes/homeRoutes';
 
-class App {
-  constructor() {
-    this.app = express();
-    this.middlewares();
-    this.routes();
-  }
+const app = express();
 
-  middlewares() {
-    this.app.use(express.urlencoded({ extended: true }));
-    this.app.use(express.json());
-  }
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-  routes() {
-    this.app.use('/', homeRoutes);
-  }
-}
+app.use('/', homeRoutes);
 
-export default new App().app;
+export default app;
