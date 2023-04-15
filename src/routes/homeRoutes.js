@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { index } from '../controllers/HomeControllers';
+import { index } from '../controllers/homeControllers';
 
 const routes = new Router();
 
