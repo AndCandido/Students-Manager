@@ -16,6 +16,6 @@ module.exports = {
     'import/first': 'off',
     'import/no-extraneous-dependencies': 'off',
     'linebreak-style': 'off',
-    'quote-props': 'off',
+    'no-return-await': 'off',
   },
 };
