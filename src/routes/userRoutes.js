@@ -1,9 +1,15 @@
 import { Router } from 'express';
 
-import { store } from '../controllers/userControllers';
+import {
+  index, store, show, update, remove,
+} from '../controllers/userControllers';
 
-const routes = new Router();
+const router = new Router();
 
-routes.post('/', store);
+router.get('/', index);
+router.get('/:id', show);
+router.post('/', store);
+router.put('/:id', update);
+router.delete('/:id', remove);
 
-export default routes;
+export default router;
