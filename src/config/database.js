@@ -16,7 +16,6 @@ module.exports = {
   },
   dialectOptions: {
     timezone: 'America/Belem',
-    allowPublicKeyRetrieval: true,
   },
   timezone: 'America/Belem',
 };

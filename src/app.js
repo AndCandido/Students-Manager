@@ -5,7 +5,10 @@ doteenv.config();
 import './database';
 
 import express from 'express';
+
+// Routes
 import homeRoutes from './routes/homeRoutes';
+import userRoutes from './routes/userRoutes';
 
 const app = express();
 
@@ -15,5 +18,6 @@ app.use(express.json());
 
 // Routes
 app.use('/', homeRoutes);
+app.use('/users/', userRoutes);
 
 export default app;
