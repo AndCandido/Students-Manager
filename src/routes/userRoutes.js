@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 // Controllers
 import {
-  index, store, show, update, remove,
+  store, update, remove, indexDev,
 } from '../controllers/userController';
 
 // Middlewares
@@ -10,10 +10,9 @@ import loginRequired from '../middlewares/loginRequired';
 
 const router = new Router();
 
-router.get('/', loginRequired, index);
-router.get('/:id', show);
+router.get('/', indexDev);
 router.post('/', store);
-router.put('/:id', update);
-router.delete('/:id', remove);
+router.put('/', loginRequired, update);
+router.delete('/', loginRequired, remove);
 
 export default router;
