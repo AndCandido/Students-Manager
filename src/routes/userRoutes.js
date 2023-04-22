@@ -1,12 +1,16 @@
 import { Router } from 'express';
 
+// Controllers
 import {
   index, store, show, update, remove,
-} from '../controllers/userControllers';
+} from '../controllers/userController';
+
+// Middlewares
+import loginRequired from '../middlewares/loginRequired';
 
 const router = new Router();
 
-router.get('/', index);
+router.get('/', loginRequired, index);
 router.get('/:id', show);
 router.post('/', store);
 router.put('/:id', update);
