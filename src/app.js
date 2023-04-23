@@ -10,6 +10,7 @@ import express from 'express';
 import homeRoutes from './routes/homeRoutes';
 import userRoutes from './routes/userRoutes';
 import tokenRoutes from './routes/tokenRoutes';
+import studentRoutes from './routes/studentRoutes';
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use(express.json());
 app.use('/', homeRoutes);
 app.use('/users/', userRoutes);
 app.use('/tokens/', tokenRoutes);
+app.use('/students/', studentRoutes);
 
 export default app;
