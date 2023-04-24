@@ -1,10 +1,19 @@
 import { Router } from 'express';
 
-import { index, store } from '../controllers/studentController';
+// Controllers
+import {
+  index, show, store, update, remove,
+} from '../controllers/studentController';
+
+// Middlewares
+import loginRequired from '../middlewares/loginRequired';
 
 const routes = new Router();
 
 routes.get('/', index);
-routes.post('/', store);
+routes.get('/:id', show);
+routes.post('/', loginRequired, store);
+routes.put('/:id', loginRequired, update);
+routes.delete('/:id', loginRequired, remove);
 
 export default routes;

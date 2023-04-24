@@ -15,30 +15,96 @@ export const index = async (req, res) => {
   }
 };
 
-const verifyErrors = (body) => {
-  const errors = [];
-  const {
-    name,
-    surname,
-    email,
-    age,
-    height,
-    weigth,
-  } = body;
-  console.log(body);
-  if (!name || !surname || !email || !age || !height || !weigth) {
-    errors.push('Campos vazios');
+export const show = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        errors: ['Id necessário'],
+      });
+    }
+
+    const student = await Student.findByPk(id);
+
+    if (!student) {
+      return res.status(400).json({
+        errors: ['Aluno não existe'],
+      });
+    }
+
+    return res.json(student);
+  } catch (e) {
+    return res.status(400).json({
+      errors: e.errors.map((err) => err.message),
+    });
   }
-  return errors;
 };
 
 export const store = async (req, res) => {
   try {
-    const errors = verifyErrors(req.body);
-    if (errors.length > 0) return res.status(400).json({ errors });
-    const newStudent = Student.create(req.body);
+    const newStudent = await Student.create(req.body);
+
     return res.json(newStudent);
   } catch (e) {
-    return res.status(400).json(e);
+    return res.status(400).json({
+      errors: e.errors.map((err) => err.message),
+    });
+  }
+};
+
+export const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        errors: ['Id necessário'],
+      });
+    }
+
+    const student = await Student.findByPk(id);
+
+    if (!student) {
+      return res.status(400).json({
+        errors: ['Aluno não existe'],
+      });
+    }
+
+    const updatedStudent = await student.update(req.body);
+
+    return res.json(updatedStudent);
+  } catch (e) {
+    return res.status(400).json({
+      errors: e.errors.map((err) => err.message),
+    });
+  }
+};
+
+export const remove = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        errors: ['Id necessário'],
+      });
+    }
+
+    const student = await Student.findByPk(id);
+
+    if (!student) {
+      return res.status(400).json({
+        errors: ['Aluno não existe'],
+      });
+    }
+
+    await student.destroy();
+
+    return res.json({ sucess: 'Aluno deletado' });
+  } catch (e) {
+    return res.status(400).json({
+      errors: e.errors.map((err) => err.message),
+    });
   }
 };
