@@ -19,5 +19,6 @@ module.exports = {
     'no-return-await': 'off',
     'import/prefer-default-export': 'off',
     'no-param-reassign': 'off',
+    'arrow-body-style': 'off',
   },
 };
