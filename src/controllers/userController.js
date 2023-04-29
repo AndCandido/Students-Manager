@@ -1,16 +1,5 @@
 import User from '../models/User';
 
-export const indexDev = async (req, res) => {
-  try {
-    const users = await User.findAll();
-    return res.json(users);
-  } catch (e) {
-    return res.status(400).json({
-      errors: e.errors.map((err) => err.message),
-    });
-  }
-};
-
 export const store = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
