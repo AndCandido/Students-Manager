@@ -5,6 +5,7 @@ doteenv.config();
 import './database';
 
 import express from 'express';
+import { resolve } from 'path';
 
 // Routes
 import homeRoutes from './routes/homeRoutes';
@@ -18,6 +19,7 @@ const app = express();
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(resolve(__dirname, '..', 'static')));
 
 // Routes
 app.use('/', homeRoutes);
