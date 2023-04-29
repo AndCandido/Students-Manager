@@ -8,13 +8,13 @@ const upload = multer(multerConfig).single('picture');
 
 export const store = (req, res) => {
   return upload(req, res, async (error) => {
-    try {
-      if (error) {
-        return res.status(400).json({
-          errors: [error.code],
-        });
-      }
+    if (error) {
+      return res.status(400).json({
+        errors: [error.code],
+      });
+    }
 
+    try {
       const { originalname, filename } = req.file;
       const { student_id } = req.body;
       const picture = await Picture.create({ originalname, filename, student_id });
@@ -22,7 +22,7 @@ export const store = (req, res) => {
       return res.json(picture);
     } catch (e) {
       return res.status(400).json({
-        errors: [e],
+        errors: ['Aluno não existe'],
       });
     }
   });

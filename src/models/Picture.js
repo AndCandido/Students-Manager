@@ -27,8 +27,4 @@ export default class Picture extends Model {
     });
     return this;
   }
-
-  static associate(models) {
-    this.belongsTo(models.Student, { foreignKey: 'student_id' });
-  }
 }

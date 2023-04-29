@@ -1,12 +1,17 @@
 import Student from '../models/Student';
+import Picture from '../models/Picture';
 
 export const index = async (req, res) => {
   try {
-    const students = await Student.findAll(
-      {
-        attributes: ['id', 'name', 'surname', 'email', 'age', 'height', 'weight'],
+    const students = await Student.findAll({
+      attributes: ['id', 'name', 'surname', 'email', 'age', 'height', 'weight'],
+      order: [['name', 'ASC'], [Picture, 'id', 'DESC']],
+      include: {
+        model: Picture,
+        attributes: ['filename'],
       },
-    );
+    });
+
     res.json(students);
   } catch (e) {
     res.status(400).json({
@@ -25,7 +30,14 @@ export const show = async (req, res) => {
       });
     }
 
-    const student = await Student.findByPk(id);
+    const student = await Student.findByPk(id, {
+      attributes: ['id', 'name', 'surname', 'email', 'age', 'height', 'weight'],
+      order: [[Picture, 'id', 'DESC']],
+      include: {
+        model: Picture,
+        attributes: ['filename'],
+      },
+    });
 
     if (!student) {
       return res.status(400).json({
@@ -35,9 +47,10 @@ export const show = async (req, res) => {
 
     return res.json(student);
   } catch (e) {
-    return res.status(400).json({
-      errors: e.errors.map((err) => err.message),
-    });
+    return res.json(e);
+    // return res.status(400).json({
+    //   errors: e.errors.map((err) => err.message),
+    // });
   }
 };
 
