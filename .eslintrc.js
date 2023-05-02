@@ -21,5 +21,10 @@ module.exports = {
     'no-param-reassign': 'off',
     'arrow-body-style': 'off',
     camelcase: 'off',
+    'func-names': 'off',
+    'no-undef': 'off',
+    'no-use-before-define': 'off',
+    'global-require': 'off',
+    'import/extensions': 'off',
   },
 };

@@ -1,3 +1,3 @@
 export const index = async (req, res) => {
-  res.json('index');
+  return res.send('index');
 };
